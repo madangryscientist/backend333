@@ -1,12 +1,16 @@
+using backend333.RequestModels;
 using Microsoft.AspNetCore.Mvc;
 
 namespace backend333.Controllers;
+[ApiController]
+[Route("[controller]")]
 
-public class StoreController : Controller
+public class StoreController : ControllerBase
 {
     // GET
-    public IActionResult Index()
+    [HttpPost(template:"StoreInput")]
+    public ActionResult<Store> StoreInput([FromBody] Store store)
     {
-        return View();
+        return Ok(store);
     }
 }

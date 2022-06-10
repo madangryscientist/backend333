@@ -10,3 +10,10 @@ public class WeatherForecast
 
     public string? Summary { get; set; }
 }
+
+public class Person
+{
+    public string Name { get; set; }
+    public int Age { get; set; }
+    public double Height { get; set; }
+}

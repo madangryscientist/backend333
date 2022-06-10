@@ -1,12 +1,23 @@
+using backend333.RequestModels;
+using backend333.ResponseModels;
 using Microsoft.AspNetCore.Mvc;
 
 namespace backend333.Controllers;
-
-public class ContactUsController : Controller
+[ApiController]
+[Route("[controller]")]
+public class ContactUsController : ControllerBase
 {
-    // GET
-    public IActionResult Index()
+    [HttpPost(template:"ContactUsInput")]
+    public  ActionResult<ContactUs> ContactUsInput([FromBody] ContactUs contactUs)
     {
-        return View();
+        if (ModelState.IsValid)
+        {
+            return Ok(new Success()
+            {
+                IsSuccessful = true
+            });
+        }
+
+        return BadRequest();
     }
 }
