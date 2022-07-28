@@ -29,30 +29,54 @@ public class WeatherForecastController : ControllerBase
 
     private static readonly Person[] PersonList = new Person[]
     {
-      new Person()
+      new ZuluPerson()
       {
           Name = "Erin", 
           Age = 21,
           Height = 2.5
       }, 
-      new Person()
+      new ZuluPerson()
       {
           Name = "Corrine",
           Age = 25,
           Height = 2.8
       },
-      new Person(){
+      new XhosaPerson(){
       Name = "Jacobus",
       Age = 36,
       Height = 3
       },
-      new Person(){
+      new XhosaPerson(){
       Name = "Charles",
       Age = 21,
       Height = 2.8
       }
     };
-
+    private static readonly INationality[] INationalityList = new INationality[]
+    {
+        new ZuluPerson()
+        {
+            Name = "Erin", 
+            Age = 21,
+            Height = 2.5
+        }, 
+        new ZuluPerson()
+        {
+            Name = "Corrine",
+            Age = 25,
+            Height = 2.8
+        },
+        new XhosaPerson(){
+            Name = "Jacobus",
+            Age = 36,
+            Height = 3
+        },
+        new XhosaPerson(){
+            Name = "Charles",
+            Age = 21,
+            Height = 2.8
+        }
+    };
     public WeatherForecastController()
     {
     }
@@ -153,13 +177,13 @@ public class WeatherForecastController : ControllerBase
     [HttpGet(template: "Person")]
     public List<Person> Persons()
     {
-        var person = new Person()
+        var person = new XhosaPerson()
         {
             Name = "Erin",
             Age = 21,
             Height = 1.62
         };
-        var person2 = new Person()
+        var person2 = new ZuluPerson()
         {
             Name = "Corrine",
             Age = 25,
@@ -177,7 +201,10 @@ public class WeatherForecastController : ControllerBase
         var content = new List<Person>()
             { };
         foreach (var element in PersonList)
+
         {
+            Console.WriteLine(element.Greeting());
+            
             if (element.Name == person.Name && element.Age == person.Age && element.Height == person.Height)
             {
                 content.Add(element);
@@ -187,4 +214,5 @@ public class WeatherForecastController : ControllerBase
         return content.Count == 0 ? NotFound() : Ok(content);
 
     }
+
 }
