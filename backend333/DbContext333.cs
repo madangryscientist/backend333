@@ -1,3 +1,4 @@
+using backend333.Migrations;
 using backend333.RequestModels;
 using Microsoft.EntityFrameworkCore;
 
@@ -13,6 +14,7 @@ public class DbContext333 : DbContext
     public DbSet<Faq> Faqs { get; set; }
     public DbSet<Store> Store { get; set; }
     public DbSet<Community> Community { get; set; }
+    public DbSet<Tracks> Track { get; set; }
     
     public DbSet<CommunityComment> CommunityComment { get; set; }
 
