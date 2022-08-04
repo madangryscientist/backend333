@@ -34,4 +34,25 @@ public class StoreController : ControllerBase
         }
         return BadRequest();
     }
+    [HttpPost(template:"TracksInput")]
+    public async Task<ActionResult<Tracks>> TracksInput([FromBody] Tracks tracks)
+    {
+        if (ModelState.IsValid)
+        {
+            _dbContext333.Add(tracks);
+            await _dbContext333.SaveChangesAsync();
+            return Ok(new Success()
+            {
+                IsSuccessful = true
+            });
+        }
+        return BadRequest();
+    }
+
+    [HttpGet(template: "TracksInput")]
+    public async Task<List<Tracks>> TracksInput()
+    {
+        var result = await _dbContext333.Track.ToListAsync();
+        return (result);
+    }
 }
