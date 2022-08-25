@@ -1,7 +1,6 @@
 using System.ComponentModel.DataAnnotations;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
-namespace backend333.RequestModels;
+namespace backend333.DbModels;
 
 public class ContactUs
 {
