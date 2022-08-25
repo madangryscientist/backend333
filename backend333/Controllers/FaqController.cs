@@ -1,7 +1,9 @@
+using backend333.DbModels;
 using backend333.RequestModels;
 using backend333.ResponseModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using FaqActive = backend333.RequestModels.FaqActive;
 
 namespace backend333.Controllers;
 [ApiController]
@@ -17,15 +19,21 @@ public class FaqController  : ControllerBase
     [HttpGet]
     public async Task<ActionResult<List<Faq>>> Get()
     {
-        var result = await _dbContext333.Faqs.ToListAsync();
+        var result = await _dbContext333.Faqs.Where(i=>i.Active).ToListAsync();
         return (result);
     }
         [HttpPost(template: "FaqInput")]
-    public async Task<ActionResult<Faq>> FaqInput([FromBody] Faq faq)
+    public async Task<ActionResult<Faq>> FaqInput([FromBody] FaqRequestModels faq)
     {
         if (ModelState.IsValid)
         {
-            _dbContext333.Add(faq);
+            var model = new Faq()
+            {
+                Email = faq.Email,
+                Name = faq.Name,
+                Question = faq.Question
+            };
+            _dbContext333.Faqs.Add(model);
             await _dbContext333.SaveChangesAsync();
             return Ok(new Success()
             {

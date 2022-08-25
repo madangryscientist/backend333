@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace backend333.RequestModels;
+namespace backend333.DbModels;
 
 public class Tracks
 {
