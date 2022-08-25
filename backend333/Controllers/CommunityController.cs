@@ -59,18 +59,18 @@ public class CommunityController : ControllerBase
         });
     }
 
-    [HttpPost(template: "Comment")]
-    public ActionResult<Success> Comment([FromBody] CommunityComment comment)
-    {
-        var comm = _dbContext333.Community
-            .Include(i=>i.Comment)
-            .First(i => i.Id == comment.CommunityId);
-       comm.Comment.Add(comment);
-        _dbContext333.SaveChanges();
-        return Ok(new Success()
-        {
-            IsSuccessful = true
-        });
-    }
+    // [HttpPost(template: "Comment")]
+    // public ActionResult<Success> Comment([FromBody] CommunityComment comment)
+    // {
+    //     var comm = _dbContext333.Community
+    //       
+    //         .First(i => i.Id == comment.CommunityId);
+    //    comm.Comment.Add(comment);
+    //     _dbContext333.SaveChanges();
+    //     return Ok(new Success()
+    //     {
+    //         IsSuccessful = true
+    //     });
+    // }
         
 }

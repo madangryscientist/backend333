@@ -1,13 +1,16 @@
 using backend333;
 using Microsoft.EntityFrameworkCore;
 
-var  DbPath =
-    @"/Users/erinvandenberg/Library/DBeaverData/workspace6/.metadata/sample-database-sqlite-1/Chinook.db";
 
 var builder = WebApplication.CreateBuilder(args);
+var accountEndpoint = builder.Configuration.GetValue<string>("db:accountEndpoint");
+var accountKey = builder.Configuration.GetValue<string>("db:key");
+var name = builder.Configuration.GetValue<string>("db:name");
 builder.Services.AddDbContext<DbContext333>(
-    optionsAction: options => options.UseSqlite(connectionString: $"Data Source={DbPath}"));
-// Add services to the container.
+    optionsAction: options => options.UseCosmos(
+        accountEndpoint,
+        accountKey,
+        databaseName:name));
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -22,9 +25,10 @@ var app = builder.Build();
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
-    app.UseSwagger();
-    app.UseSwaggerUI();
+
 }
+app.UseSwagger();
+app.UseSwaggerUI();
 app.UseCors("corsapp");
 app.UseHttpsRedirection();
 

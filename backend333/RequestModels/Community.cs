@@ -4,7 +4,7 @@ namespace backend333.RequestModels;
 
 public class Community
 {
-    [Key] public int Id { get; set; }
+  [Key] public Guid Id { get; set; } = Guid.NewGuid();
     public string Question { get; set; }
     public bool Active { get; set; }
     public int Count { get; set; }
@@ -13,5 +13,5 @@ public class Community
 
 public class CommunityIdentity
 {
-     public int Id { get; set; }
+     public Guid Id { get; set; }
 }

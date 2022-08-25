@@ -16,6 +16,5 @@ public class DbContext333 : DbContext
     public DbSet<Community> Community { get; set; }
     public DbSet<Tracks> Track { get; set; }
     
-    public DbSet<CommunityComment> CommunityComment { get; set; }
-
+    public DbSet<WeddingContactUs>  WeddingContactUs{ get; set; }
 }

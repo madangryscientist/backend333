@@ -12,6 +12,7 @@ public class ContactUsController : ControllerBase
     public ContactUsController(DbContext333 dbContext333)
     {
         _dbContext333 = dbContext333;
+        
     }
     [HttpGet]
     public async Task<ActionResult<List<ContactUs>>> Get()
