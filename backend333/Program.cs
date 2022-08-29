@@ -1,14 +1,14 @@
 using backend333;
 using Microsoft.EntityFrameworkCore;
 
-var  DbPath =
-    @"/Users/erinvandenberg/Library/DBeaverData/workspace6/.metadata/sample-database-sqlite-1/Chinook.db";
+
 
 var builder = WebApplication.CreateBuilder(args);
+var DbPath = builder.Configuration.GetValue<string>("Db:Path");
 builder.Services.AddDbContext<DbContext333>(
     optionsAction: options => options.UseSqlite(connectionString: $"Data Source={DbPath}"));
 // Add services to the container.
-
+builder.Services.AddHttpClient<SlackService>();
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();

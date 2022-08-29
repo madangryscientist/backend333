@@ -10,9 +10,12 @@ namespace backend333.Controllers;
 public class ContactUsController : ControllerBase
 {
     private readonly DbContext333 _dbContext333;
-    public ContactUsController(DbContext333 dbContext333)
+    private readonly SlackService _slackService;
+
+    public ContactUsController(DbContext333 dbContext333, SlackService slackService)
     {
         _dbContext333 = dbContext333;
+        _slackService = slackService;
     }
     [HttpGet]
     public async Task<ActionResult<List<ContactUs>>> Get()
@@ -33,5 +36,18 @@ public class ContactUsController : ControllerBase
             });
         }
         return BadRequest();
+    }
+
+    [HttpPost(template: "Test")]
+    public async Task<ActionResult> Test()
+    {
+        var msg = new SlackMessage
+        {
+            channel = "wedding-rsvp",
+            text = "Hi there!",
+            as_user = true,
+        };
+        await _slackService.PostAsync(msg);
+        return Ok();
     }
 }
