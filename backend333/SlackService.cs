@@ -12,9 +12,6 @@ public class SlackService
     public SlackService(HttpClient httpClient)
     {
         _httpClient = httpClient;
-        _httpClient.BaseAddress = new Uri("https://slack.com/api/");
-
-        _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", "xoxb-3554094122145-3994457821397-zpxKyV4JnOZIda8goJ0toJob");
     }
 
     public async Task PostAsync(SlackMessage msg)
