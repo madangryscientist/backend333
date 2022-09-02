@@ -9,5 +9,4 @@ public class Tracks
     public int Bpm { get; set; }
     public string Tune { get; set; }
     public string SongUrl { get; set; }
-    
 }

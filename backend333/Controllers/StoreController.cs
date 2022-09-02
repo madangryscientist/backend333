@@ -11,9 +11,12 @@ namespace backend333.Controllers;
 public class StoreController : ControllerBase
 {
     private readonly DbContext333 _dbContext333;
-    public StoreController(DbContext333 dbContext333)
+    private readonly SlackService _slackService;
+
+    public StoreController(DbContext333 dbContext333, SlackService slackService)
     {
         _dbContext333 = dbContext333;
+        _slackService = slackService;
     }
     [HttpGet]
     public async Task<ActionResult<List<Store>>> Get()
@@ -56,4 +59,27 @@ public class StoreController : ControllerBase
         var result = await _dbContext333.Track.ToListAsync();
         return (result);
     }
+    [HttpPost(template: "Test")]
+    public async Task<ActionResult> Test([FromBody] StoreContactUs storeContactUs)
+    {
+        if (!ModelState.IsValid)
+        {
+            return BadRequest();
+        }
+
+        var track = await _dbContext333.Track.FirstOrDefaultAsync(i => storeContactUs.TrackId == i.Id);
+       if (track == null)
+       {
+           return NotFound();
+       }
+        var msg = new SlackMessage
+        {
+            channel = "wedding-rsvp",
+            text = storeContactUs.Name + " " + storeContactUs.Email +" " + track.TrackName, 
+            as_user = true,
+        };
+        await _slackService.PostAsync(msg);
+        return Ok(new Success(){IsSuccessful = true});
+    }
+
 }
