@@ -4,3 +4,7 @@ obj/
 riderModule.iml
 /_ReSharper.Caches/
 backend333/appsettings.Development.json
+
+**/.DS_Store
+
+.idea/
